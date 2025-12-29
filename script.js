@@ -233,3 +233,11 @@ async function submitLogin() {
     alert('Logged in successfully!');
     closeLoginForm();
 }
+
+function showWebsite() {
+    document.getElementById('welcome-screen').style.display = 'none';
+    document.querySelector('main').style.display = 'block';  // show products
+    document.querySelector('header').style.display = 'flex'; // show top bar
+    // show footer or other panels if needed
+}
+showWebsite();
