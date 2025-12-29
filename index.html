@@ -2,57 +2,91 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIMPO - Handmade Beauty</title>
+  <title>LIMPO</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Top Bar / Header -->
+  <div class="side-menu" id="side-menu">
+  <div class="panel-header">
+    <h2>Menu</h2>
+    <span class="close-panel" onclick="closeMenu()">×</span>
+  </div>
+
+  <a href="index.html">🏠 Home</a>
+<a href="shop.html">🛍 Shop</a>
+<a href="new-arrivals.html">✨ New Arrivals</a>
+<a href="best-sellers.html">🔥 Best Sellers</a>
+<a href="index.html#about">ℹ️ About</a>
+<a href="mailto:limpo.online.store2025@gmail.com">📩 Contact</a>
+</div>
+
   <header class="top-bar">
-    <div class="menu-icon" onclick="openMenu()">☰</div>
-    <a href="#" class="logo">LIMPO</a>
-    <div class="top-actions">
-      <input type="text" placeholder="Search products..." id="searchInput">
-      <button class="icon-btn" onclick="openCart()">🛒</button>
-      <button class="icon-btn" onclick="openSaves()">❤️</button>
-      <button class="icon-btn" onclick="openProfile()">👤</button>
-    </div>
-  </header>
+  <div class="menu-icon" onclick="openMenu()">☰</div>
+  <a href="index.html" class="logo">LIMPO</a>
 
-  <!-- Side Menu -->
-  <nav class="side-menu" id="side-menu">
-    <div class="menu-header">
-      <h2>LIMPO</h2>
-      <span class="close-menu" onclick="closeMenu()">×</span>
-    </div>
-    <a href="#" onclick="closeMenu()">Home</a>
-    <a href="#about" onclick="closeMenu()">About</a>
-    <a href="#">Shop</a>
-    <a href="#">New Arrivals</a>
-    <a href="#">Best Sellers</a>
-    <hr>
-  </nav>
+  <div class="top-actions">
+    <input type="text" placeholder="Search..." class="search-bar" id="searchInput">
+    <button class="icon-btn" onclick="openCart()">🛒</button>
+    <button class="icon-btn" onclick="openSaves()">❤️</button>
+    <button class="icon-btn" onclick="openProfile()">👤</button>
+  </div>
+</header>
 
-  <!-- Main Products Section -->
+
+  <div class="panel cart-panel" id="cart-panel">
+  <div class="panel-header">
+    <h2>My Cart</h2>
+    <span class="close-panel" onclick="closeCart()">×</span>
+  </div>
+
+  <div id="cart-items">Your cart is empty.</div>
+
+  <div class="cart-footer">
+    <p>Total: AED <span id="cart-total">0</span></p>
+    <button class="checkout-btn">Checkout</button>
+  </div>
+</div>
+
+
+ <div class="panel saves-panel" id="saves-panel">
+  <div class="panel-header">
+    <h2>Saved Items</h2>
+    <span class="close-panel" onclick="closeSaves()">×</span>
+  </div>
+
+  <div id="saves-items">No saved products yet.</div>
+</div>
+
+
+  <div class="panel profile-panel" id="profile-panel">
+  <div class="panel-header">
+    <h2>My Profile</h2>
+    <span class="close-panel" onclick="closeProfile()">×</span>
+  </div>
+
+  <div class="profile-content">
+    <p><strong>Status:</strong> Guest</p>
+    <button class="profile-btn">Log In</button>
+    <button class="profile-btn">Create Account</button>
+  </div>
+</div>
+
+
+  <!-- Main Content -->
   <main>
-    <h2 class="section-title">Our Products</h2>
-    <div class="products" id="products-container">
-      <!-- Product cards will be dynamically added here -->
-    </div>
+    <main class="hero-section">
+  <div class="hero-content">
+    <h1>Handmade Lip Glosses for Your Unique Glow</h1>
+    <p>Experience luxury, hydration, and confidence in every swipe.</p>
+    <a href="shop.html" class="shop-btn">Shop Now 🛍</a>
+  </div>
+</main>
+
   </main>
 
-  <!-- About Section -->
-  <section id="about" class="about-section">
-    <div class="about-content">
-      <h2>About LIMPO</h2>
-      <p>LIMPO is a handmade beauty brand created for those who believe self-care is art.</p>
-      <p>Every product is carefully crafted with passion and love for hydration, comfort, and shine.</p>
-    </div>
-  </section>
-
-  <!-- Product Detail Modal -->
-  <div id="product-detail" class="product-detail">
+  <!-- Product Detail (HIDDEN BY DEFAULT) -->
+  <div id="product-detail" class="product-detail" style="display:none;">
     <div class="detail-left">
       <img src="" id="detail-main-photo">
       <div class="thumbnails" id="detail-thumbnails"></div>
@@ -68,65 +102,40 @@
     </div>
   </div>
 
-  <!-- Panels -->
-  <div class="cart-panel" id="cart-panel">
-    <div class="cart-header">
-      <h2>My Cart</h2>
-      <span class="close-cart" onclick="closeCart()">×</span>
-    </div>
-    <div id="cart-items" class="cart-items"></div>
-    <div class="cart-footer">
-      <p>Total: AED <span id="cart-total">0</span></p>
-    </div>
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="about-content">
+      <h2>About LIMPO</h2>
+      <p>
+  LIMPO is a handmade beauty brand created for those who believe that self-care is a form of art.
+  Every product is carefully crafted with passion, patience, and love — because we believe beauty
+  should feel personal, luxurious, and unique.
+</p>
+
+<p>
+  Our lip glosses are handmade in small batches using thoughtfully selected ingredients to deliver
+  hydration, comfort, and long-lasting shine. Each shade, scent, and texture is designed to enhance
+  your natural beauty while giving you a moment of confidence and self-expression.
+</p>
+
+<p>
+  At LIMPO, we don’t just sell products — we create experiences. From the first swipe to the final
+  glow, our goal is to make you feel empowered, elegant, and unforgettable.
+</p>
+  </section>
+
+  <footer class="footer">
+  <div class="footer-links">
+    <a href="mailto:limpo.online.store2025@gmail.com">Contact Us</a>
+    <a href="https://www.instagram.com/limpo_official2025/" target="_blank">Instagram</a>
+    <a href="https://www.tiktok.com/@limpo3381" target="_blank">TikTok</a>
+    <a href="#about">About</a>
   </div>
+  <p>© 2025 LIMPO. All rights reserved.</p>
+</footer>
 
-  <div class="saves-panel" id="saves-panel">
-    <div class="saves-header">
-      <h2>Saved Items</h2>
-      <span class="close-saves" onclick="closeSaves()">×</span>
-    </div>
-    <div id="saves-items" class="saves-items"></div>
-  </div>
 
-  <div class="profile-panel" id="profile-panel">
-    <div class="profile-header">
-      <h2>My Profile</h2>
-      <span class="close-profile" onclick="closeProfile()">×</span>
-    </div>
-    <div class="profile-content" id="profile-content"></div>
-  </div>
-
-  <!-- Sign Up / Login -->
-  <div id="signup-form" class="auth-form">
-    <h2>Sign Up</h2>
-    <input type="text" id="signup-name" placeholder="Name">
-    <input type="email" id="signup-email" placeholder="Email">
-    <input type="password" id="signup-password" placeholder="Password">
-    <button onclick="submitSignup()">Sign Up</button>
-    <button onclick="closeSignupForm()">Cancel</button>
-  </div>
-
-  <div id="login-form" class="auth-form">
-    <h2>Login</h2>
-    <input type="email" id="login-email" placeholder="Email">
-    <input type="password" id="login-password" placeholder="Password">
-    <button onclick="submitLogin()">Login</button>
-    <button onclick="closeLoginForm()">Cancel</button>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-left">
-      <a href="#about">About</a>
-      <a href="mailto:limpo.online.store2025@gmail.com">Contact</a>
-    </div>
-    <div class="footer-right">
-      <p>&copy; 2025 LIMPO</p>
-    </div>
-  </footer>
-
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
 </body>
 </html>
+
