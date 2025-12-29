@@ -5,13 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LIMPO</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
+<!-- Top Bar -->
 <header class="top-bar">
   <div class="menu-icon" onclick="openMenu()">☰</div>
   <a href="#" class="logo">LIMPO</a>
   <div class="top-actions">
+    <input type="text" placeholder="Search..." id="searchInput">
     <button class="icon-btn" onclick="openCart()">🛒</button>
     <button class="icon-btn" onclick="openSaves()">❤️</button>
     <button class="icon-btn" onclick="openProfile()">👤</button>
@@ -26,32 +29,56 @@
   </div>
   <a href="#">Home</a>
   <a href="#about">About</a>
+  <a href="#">New Arrivals</a>
+  <a href="#">Best Sellers</a>
 </div>
 
-<!-- Panels -->
-<div class="panel cart-panel" id="cart-panel">
-  <h2>Cart</h2>
-  <span onclick="closeCart()">×</span>
-</div>
-
-<div class="panel saves-panel" id="saves-panel">
-  <h2>Saved Items</h2>
-  <span onclick="closeSaves()">×</span>
-</div>
-
-<div class="panel profile-panel" id="profile-panel">
-  <h2>Profile</h2>
-  <span onclick="closeProfile()">×</span>
-  <div id="profile-content"></div>
-</div>
+<!-- Products -->
+<main>
+  <h2 class="section-title">Our Products</h2>
+  <div class="products" id="products-container"></div>
+</main>
 
 <!-- About Section -->
-<section id="about">
-  <h2>About LIMPO</h2>
-  <p>LIMPO is handmade beauty brand...</p>
+<section id="about" class="about-section">
+  <div class="about-content">
+    <h2>About LIMPO</h2>
+    <p>LIMPO is a handmade beauty brand created for those who believe self-care is an art.</p>
+  </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Panels -->
+<div class="cart-panel" id="cart-panel"><h2>Cart</h2><span onclick="closeCart()">×</span><div id="cart-items"></div></div>
+<div class="saves-panel" id="saves-panel"><h2>Saved Items</h2><span onclick="closeSaves()">×</span><div id="saves-items"></div></div>
+<div class="profile-panel" id="profile-panel">
+  <h2>My Profile</h2>
+  <span onclick="closeProfile()">×</span>
+  <div class="profile-content">
+    <button onclick="openSignupForm()">Sign Up</button>
+    <button onclick="openLoginForm()">Login</button>
+  </div>
+</div>
+
+<!-- Signup Form -->
+<div id="signup-form" style="display:none;">
+  <h2>Sign Up</h2>
+  <input type="text" id="signup-name" placeholder="Name">
+  <input type="email" id="signup-email" placeholder="Email">
+  <input type="text" id="signup-phone" placeholder="Phone">
+  <input type="password" id="signup-password" placeholder="Password">
+  <button onclick="submitSignup()">Sign Up</button>
+  <button onclick="closeSignupForm()">Cancel</button>
+</div>
+
+<!-- Login Form -->
+<div id="login-form" style="display:none;">
+  <h2>Login</h2>
+  <input type="email" id="login-email" placeholder="Email">
+  <input type="password" id="login-password" placeholder="Password">
+  <button onclick="submitLogin()">Login</button>
+  <button onclick="closeLoginForm()">Cancel</button>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
