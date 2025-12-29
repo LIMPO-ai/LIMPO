@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIMPO</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIMPO</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
   <!-- Top Bar -->
   <header class="top-bar">
     <div class="menu-icon" onclick="openMenu()">☰</div>
@@ -27,6 +28,7 @@
       <h2>LIMPO</h2>
       <span class="close-menu" onclick="closeMenu()">×</span>
     </div>
+
     <a href="#">Home</a>
     <a href="#">Shop</a>
     <a href="#">New Arrivals</a>
@@ -35,10 +37,10 @@
     <a href="mailto:youremail@example.com">Contact Us</a>
   </div>
 
-  <!-- Products Section -->
+  <!-- Products -->
   <main>
     <h2 class="section-title">Our Products</h2>
-    <div class="products">
+    <div class="products" id="products-container">
       <div class="card" onclick="openProductDetail(1)">
         <img src="images/The First Bite 1.jpg" class="product-thumbnail">
         <h3>The First Bite</h3>
@@ -80,7 +82,7 @@
     </div>
   </div>
 
-  <!-- Saves Panel -->
+  <!-- Saved Items Panel -->
   <div class="saves-panel" id="saves-panel">
     <div class="saves-header">
       <h2>Saved Items</h2>
@@ -95,47 +97,38 @@
       <h2>My Profile</h2>
       <span class="close-profile" onclick="closeProfile()">×</span>
     </div>
-    <div class="profile-content">
-      <!-- Dynamic content: Sign Up / Login or User Info -->
+    <div class="profile-content" id="profile-content">
+      <!-- Dynamic: Sign Up / Login or User Info -->
     </div>
-  </div>
-
-  <!-- Signup Form -->
-  <div id="signup-form" class="form-panel">
-    <h2>Sign Up</h2>
-    <input type="text" id="signup-name" placeholder="Name"><br><br>
-    <input type="email" id="signup-email" placeholder="Email"><br><br>
-    <input type="text" id="signup-phone" placeholder="Phone"><br><br>
-    <input type="password" id="signup-password" placeholder="Password"><br><br>
-    <button onclick="submitSignup()">Sign Up</button>
-    <button onclick="closeSignupForm()">Cancel</button>
-  </div>
-
-  <!-- Login Form -->
-  <div id="login-form" class="form-panel">
-    <h2>Login</h2>
-    <input type="email" id="login-email" placeholder="Email"><br><br>
-    <input type="password" id="login-password" placeholder="Password"><br><br>
-    <button onclick="submitLogin()">Login</button>
-    <button onclick="closeLoginForm()">Cancel</button>
   </div>
 
   <!-- About Section -->
   <section id="about" class="about-section">
     <div class="about-content">
       <h2>About LIMPO</h2>
-      <p>LIMPO is a handmade beauty brand created for those who believe self-care is art.</p>
-      <p>Our lip glosses are handmade in small batches with carefully selected ingredients.</p>
-      <p>We create experiences, not just products. Feel empowered and elegant with LIMPO.</p>
+      <p>
+        LIMPO is a handmade beauty brand created for those who believe that self-care is a form of art.
+      </p>
+      <p>
+        Every product is carefully crafted with passion, patience, and love.
+      </p>
+      <p>
+        Our lip glosses are handmade in small batches using carefully selected ingredients for hydration,
+        comfort, and long-lasting shine.
+      </p>
+      <p>
+        At LIMPO, we don’t just sell products — we create experiences. Our goal is to make you feel
+        empowered, elegant, and unforgettable.
+      </p>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
     <div class="footer-left">
-      <a href="mailto:limpo.online.store2025@gmail.com">Contact Us</a>
-      <a href="https://www.tiktok.com/@limpo3381">TikTok</a>
-      <a href="https://www.instagram.com/limpo_official2025/">Instagram</a>
+      <a href="mailto:limpo.online.store2025@gmail.com" target="_blank">Contact Us</a>
+      <a href="https://www.tiktok.com/@limpo3381" target="_blank">TikTok</a>
+      <a href="https://www.instagram.com/limpo_official2025/" target="_blank">Instagram</a>
       <a href="#about">About</a>
     </div>
     <div class="footer-right">
@@ -143,7 +136,6 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
 </body>
