@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIMPO</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIMPO</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- Side Menu -->
-<div class="side-menu" id="side-menu">
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="menu-icon" onclick="openMenu()">☰</div>
+    <a href="#" class="logo">LIMPO</a>
+    <div class="top-actions">
+      <input type="text" placeholder="Search..." class="search-bar" id="searchInput">
+      <button class="icon-btn" onclick="openCart()">🛒</button>
+      <button class="icon-btn" onclick="openSaves()">❤️</button>
+      <button class="icon-btn" onclick="openProfile()">👤</button>
+    </div>
+  </header>
+
+  <!-- Side Menu -->
+  <div class="side-menu" id="side-menu">
     <div class="menu-header">
-        <h2>LIMPO</h2>
-        <span class="close-menu" onclick="closeMenu()">×</span>
+      <h2>LIMPO</h2>
+      <span class="close-menu" onclick="closeMenu()">×</span>
     </div>
     <a href="#">Home</a>
     <a href="#">Shop</a>
@@ -23,120 +33,101 @@
     <a href="#">Best Sellers</a>
     <a href="#about">About</a>
     <a href="mailto:youremail@example.com">Contact Us</a>
-</div>
+  </div>
 
-<!-- Top Bar -->
-<header class="top-bar">
-    <div class="menu-icon" onclick="openMenu()">☰</div>
-    <a href="#" class="logo">LIMPO</a>
-    <div class="top-actions">
-        <input type="text" placeholder="Search..." class="search-bar" id="searchInput">
-        <button class="icon-btn" onclick="openCart()">🛒</button>
-        <button class="icon-btn" onclick="openSaves()">❤️</button>
-        <button class="icon-btn" onclick="openProfile()">👤</button>
-    </div>
-</header>
-
-<!-- Products -->
-<main>
+  <!-- Products -->
+  <main>
     <h2 class="section-title">Our Products</h2>
     <div class="products">
-        <div class="card" onclick="openProductDetail(1)">
-            <img src="images/The First Bite 1.jpg" class="product-thumbnail">
-            <h3>The First Bite</h3>
-        </div>
-        <div class="card" onclick="openProductDetail(2)">
-            <img src="images/Bee's Bless 1.jpg" class="product-thumbnail">
-            <h3>Bee's Bless</h3>
-        </div>
+      <div class="card" onclick="openProductDetail(1)">
+        <img src="images/The First Bite 1.jpg" class="product-thumbnail">
+        <h3>The First Bite</h3>
+      </div>
+      <div class="card" onclick="openProductDetail(2)">
+        <img src="images/Bee's Bless 1.jpg" class="product-thumbnail">
+        <h3>Bee's Bless</h3>
+      </div>
     </div>
-</main>
+  </main>
 
-<!-- Product Detail -->
-<div id="product-detail" class="product-detail" style="display:none;">
+  <!-- Product Detail Panel -->
+  <div id="product-detail" class="product-detail">
     <div class="detail-left">
-        <img src="" id="detail-main-photo">
-        <div class="thumbnails" id="detail-thumbnails"></div>
+      <img src="" id="detail-main-photo">
+      <div class="thumbnails" id="detail-thumbnails"></div>
     </div>
     <div class="detail-right">
-        <h2 id="detail-name"></h2>
-        <p id="detail-description"></p>
-        <p class="price" id="detail-price"></p>
-        <label for="qty">Quantity:</label>
-        <input type="number" id="qty" value="1" min="1">
-        <button id="add-to-cart">Add to Cart</button>
-        <button id="close-detail">Close</button>
+      <h2 id="detail-name"></h2>
+      <p id="detail-description"></p>
+      <p class="price" id="detail-price"></p>
+      <label for="qty">Quantity:</label>
+      <input type="number" id="qty" value="1" min="1">
+      <button id="add-to-cart">Add to Cart</button>
+      <button id="close-detail">Close</button>
     </div>
-</div>
+  </div>
 
-<!-- Cart Panel -->
-<div class="cart-panel" id="cart-panel">
+  <!-- Cart Panel -->
+  <div class="cart-panel" id="cart-panel">
     <div class="cart-header">
-        <h2>My Cart</h2>
-        <span class="close-cart" onclick="closeCart()">×</span>
+      <h2>My Cart</h2>
+      <span class="close-cart" onclick="closeCart()">×</span>
     </div>
     <div class="cart-items" id="cart-items"></div>
     <div class="cart-footer">
-        <p>Total: AED <span id="cart-total">0</span></p>
-        <button class="checkout-btn">Checkout</button>
+      <p>Total: AED <span id="cart-total">0</span></p>
+      <button class="checkout-btn">Checkout</button>
     </div>
-</div>
+  </div>
 
-<!-- Saves Panel -->
-<div class="saves-panel" id="saves-panel">
+  <!-- Saves Panel -->
+  <div class="saves-panel" id="saves-panel">
     <div class="saves-header">
-        <h2>Saved Items</h2>
-        <span class="close-saves" onclick="closeSaves()">×</span>
+      <h2>Saved Items</h2>
+      <span class="close-saves" onclick="closeSaves()">×</span>
     </div>
     <div class="saves-items" id="saves-items"></div>
-</div>
+  </div>
 
-<!-- Profile Panel -->
-<div class="profile-panel" id="profile-panel">
+  <!-- Profile Panel -->
+  <div class="profile-panel" id="profile-panel">
     <div class="profile-header">
-        <h2>My Profile</h2>
-        <span class="close-profile" onclick="closeProfile()">×</span>
+      <h2>My Profile</h2>
+      <span class="close-profile" onclick="closeProfile()">×</span>
     </div>
     <div class="profile-content" id="profile-content">
-        <!-- Will show Sign Up / Log In or actual profile -->
-        <button onclick="openSignupForm()">Sign Up</button>
-        <button onclick="openLoginForm()">Log In</button>
+      <!-- Dynamic: either Sign Up / Log In or user info -->
     </div>
-</div>
+  </div>
 
-<!-- Signup Form -->
-<div id="signup-form" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:10000; padding:50px;">
-    <h2>Sign Up</h2>
-    <input type="text" id="signup-name" placeholder="Name"><br><br>
-    <input type="email" id="signup-email" placeholder="Email"><br><br>
-    <input type="text" id="signup-phone" placeholder="Phone"><br><br>
-    <input type="password" id="signup-password" placeholder="Password"><br><br>
-    <button onclick="submitSignup()">Sign Up</button>
-    <button onclick="closeSignupForm()">Cancel</button>
-</div>
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="about-content">
+      <h2>About LIMPO</h2>
+      <p>
+        LIMPO is a handmade beauty brand created for those who believe that self-care is a form of art.
+      </p>
+      <p>
+        Every product is carefully crafted with passion, patience, and love.
+      </p>
+    </div>
+  </section>
 
-<!-- Login Form -->
-<div id="login-form" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:10000; padding:50px;">
-    <h2>Login</h2>
-    <input type="email" id="login-email" placeholder="Email"><br><br>
-    <input type="password" id="login-password" placeholder="Password"><br><br>
-    <button onclick="submitLogin()">Login</button>
-    <button onclick="closeLoginForm()">Cancel</button>
-</div>
-
-<!-- Footer -->
-<footer>
+  <!-- Footer -->
+  <footer>
     <div class="footer-left">
-        <a href="mailto:limpo.online.store2025@gmail.com" target="_blank">Contact Us</a>
-        <a href="https://www.tiktok.com/@limpo3381" target="_blank">TikTok</a>
-        <a href="https://www.instagram.com/limpo_official2025/" target="_blank">Instagram</a>
-        <a href="#about">About</a>
+      <a href="mailto:limpo.online.store2025@gmail.com" target="_blank">Contact Us</a>
+      <a href="https://www.tiktok.com/@limpo3381" target="_blank">TikTok</a>
+      <a href="https://www.instagram.com/limpo_official2025/" target="_blank">Instagram</a>
+      <a href="#about">About</a>
     </div>
     <div class="footer-right">
-        <p>&copy; 2025 LIMPO. All rights reserved.</p>
+      <p>&copy; 2025 LIMPO. All rights reserved.</p>
     </div>
-</footer>
+  </footer>
 
-<script src="script.js"></script>
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
 </body>
 </html>
