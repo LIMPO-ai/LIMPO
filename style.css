@@ -1,135 +1,184 @@
 /* ------------------ General ------------------ */
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', serif;
     background: #ffffff;
 }
 
-/* ------------------ Top Bar ------------------ */
-.top-bar {
-    position: sticky;
-    top: 0;
-    display: grid;
-    grid-template-columns: 60px 1fr 180px;
-    align-items: center;
-    padding: 16px 20px;
-    background: #7a0f1a;
-    color: white;
-}
-
-.menu-icon { cursor: pointer; font-size: 24px; }
-.logo { justify-self: center; font-size: 28px; font-weight: 600; }
-.top-actions { display: flex; justify-content: flex-end; gap: 10px; }
-
-.search-bar {
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: none;
-    outline: none;
-}
-.icon-btn { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
-
-/* ------------------ Side Menu ------------------ */
-.side-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 260px;
-    height: 100%;
-    background: white;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 9999;
-    padding: 20px;
-    box-shadow: 2px 0 15px rgba(0,0,0,0.2);
-}
-.side-menu a {
-    display: block;
-    padding: 12px 0;
-    color: #7a0f1a;
+a {
+    color: #6b0000;
     text-decoration: none;
-    font-weight: 500;
 }
-.close-menu { font-size: 26px; cursor: pointer; float: right; }
+
+.section-title {
+    text-align: center;
+    margin: 30px 0 20px 0;
+}
 
 /* ------------------ Products ------------------ */
-.section-title { text-align: center; margin: 30px 0 20px 0; color: #7a0f1a; }
 .products {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 0 20px 50px 20px;
+    padding: 20px;
 }
+
 .card {
-    background: #fff;
-    color: #7a0f1a;
+    background: #ffffff;
+    color: #6b0000;
     padding: 10px;
     border-radius: 12px;
     width: 180px;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    box-shadow: 0 0 15px rgba(74,0,0,0.2);
     transition: transform 0.3s;
 }
+
 .card:hover { transform: scale(1.05); }
-.card img { width: 100%; border-radius: 10px; }
+
+.product-thumbnail {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* ------------------ Product Detail ------------------ */
+.product-detail {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 999;
+    padding: 50px 20px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 50px;
+    overflow-y: auto;
+}
+
+.detail-left { flex: 1; text-align: center; }
+.detail-left img#detail-main-photo { width: 300px; border-radius: 12px; margin-bottom: 10px; }
+
+.thumbnails img {
+    width: 60px;
+    margin: 0 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+.thumbnails img:hover { border: 2px solid #6b0000; }
+
+.detail-right { flex: 1; max-width: 300px; }
+.detail-right h2 { color: #6b0000; }
+.detail-right .price { font-weight: bold; margin: 10px 0; }
+.detail-right input[type=number] { width: 60px; padding: 5px; margin: 5px 0 10px 0; }
+.detail-right button {
+    background: #6b0000;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.detail-right button:hover { background: #7a0f1a; }
+
+/* ------------------ Header / Top Bar ------------------ */
+.top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: 60px 1fr 60px;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: #6b0000;
+}
+
+.menu-icon { justify-self: start; color: #ffffff; cursor: pointer; }
+.logo { color: white; font-size: 28px; font-weight: 600; justify-self: center; letter-spacing: 1px; }
+.top-actions { position: absolute; right: 20px; display: flex; align-items: center; gap: 12px; }
+.search-bar { padding: 7px 12px; border-radius: 20px; border: none; outline: none; }
+.icon-btn { background: transparent; border: none; font-size: 20px; cursor: pointer; color: white; }
+
+/* ------------------ Panels ------------------ */
+.side-menu, .cart-panel, .saves-panel, .profile-panel {
+    position: fixed;
+    top: 0;
+    width: 320px;
+    height: 100%;
+    background: white;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+    padding: 20px;
+    transition: transform 0.3s;
+    z-index: 9999;
+}
+
+.side-menu { left: 0; transform: translateX(-100%); }
+.side-menu a { display: block; padding: 12px 0; font-size: 16px; color: #7a0f1a; }
+.side-menu hr { margin: 15px 0; border: none; border-top: 1px solid #eee; }
+.menu-header { display: flex; justify-content: space-between; align-items: center; }
+.close-menu { font-size: 26px; cursor: pointer; }
+
+.cart-panel, .saves-panel, .profile-panel { right: 0; transform: translateX(100%); }
+.cart-header, .saves-header, .profile-header { display: flex; justify-content: space-between; align-items: center; }
+.close-cart, .close-saves, .close-profile { font-size: 26px; cursor: pointer; }
+
+.cart-items, .saves-items, .profile-content { margin-top: 20px; }
+.cart-footer { position: absolute; bottom: 20px; width: 85%; }
+.checkout-btn { width: 100%; padding: 12px; background: #7a0f1a; color: white; border: none; border-radius: 8px; cursor: pointer; }
+.profile-content button { width: 100%; padding: 12px; background: #7a0f1a; color: white; border: none; border-radius: 8px; margin-top: 10px; cursor: pointer; }
+
+/* ------------------ Auth Forms ------------------ */
+.auth-form {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 10000;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.auth-form input { display: block; width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+.auth-form button { background: #6b0000; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; }
+.auth-form button:hover { background: #7a0f1a; }
 
 /* ------------------ About ------------------ */
 .about-section {
     background: #7a0f1a;
     color: white;
     padding: 80px 20px;
-    text-align: center;
 }
-.about-section h2 { font-size: 36px; margin-bottom: 20px; }
-.about-section p { font-size: 18px; line-height: 1.6; }
+.about-content { max-width: 800px; margin: auto; text-align: center; }
+.about-content h2 { font-size: 36px; margin-bottom: 30px; letter-spacing: 1px; }
+.about-content p { font-size: 17px; line-height: 1.8; margin-bottom: 18px; }
 
-/* ------------------ Panels ------------------ */
-.cart-panel, .saves-panel, .profile-panel, #signup-form, #login-form {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 320px;
-    height: 100%;
-    background: white;
-    padding: 20px;
-    box-shadow: -2px 0 15px rgba(0,0,0,0.2);
-    transform: translateX(100%);
-    transition: transform 0.3s;
-    z-index: 9999;
-    overflow-y: auto;
-}
-.cart-panel h2, .saves-panel h2, .profile-panel h2, #signup-form h2, #login-form h2 {
-    margin-top: 0;
-}
-.cart-panel span, .saves-panel span, .profile-panel span { cursor: pointer; font-size: 24px; float: right; }
-
-.profile-content button, #signup-form button, #login-form button {
-    width: 100%;
-    padding: 12px;
+/* ------------------ Footer ------------------ */
+footer {
     background: #7a0f1a;
     color: white;
-    border: none;
-    border-radius: 8px;
-    margin-top: 10px;
-    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    flex-wrap: wrap;
+    font-size: 14px;
 }
-.profile-content button:hover, #signup-form button:hover, #login-form button:hover { background: #950f1a; }
-
-input[type=text], input[type=email], input[type=password] {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
+footer a { color: white; margin-right: 20px; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+.footer-left { display: flex; align-items: center; gap: 15px; }
+.footer-right { font-size: 13px; }
 
 /* ------------------ Responsive ------------------ */
 @media (max-width: 768px) {
-    .products { flex-direction: column; align-items: center; }
-    .top-bar { grid-template-columns: 50px 1fr 150px; }
-    .side-menu { width: 220px; }
-    .cart-panel, .saves-panel, .profile-panel { width: 100%; }
+    .products { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .about-section { padding: 30px 15px; text-align: center; }
+    footer { font-size: 14px; }
 }
