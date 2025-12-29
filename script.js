@@ -71,7 +71,7 @@ function closeSaves() {
     document.getElementById("saves-panel").style.transform = "translateX(100%)";
 }
 function openProfile() {
-    showProfile();
+    showProfile(); // fetch real user
     closeCart();
     closeSaves();
     document.getElementById("profile-panel").style.transform = "translateX(0)";
@@ -133,6 +133,7 @@ async function showProfile() {
         `;
     }
 }
+
 
 // ------------------ Cart ------------------
 async function addToCart(productId, quantity) {
