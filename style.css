@@ -1,0 +1,409 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', serif;
+    background: #ffffff;
+}
+
+a {
+    color: #6b0000;
+    text-decoration: none;
+}
+
+.brand-name {
+    font-family: Arial, Helvetica, sans-serif, cursive;
+    font-size: 48px;
+    margin: 0;
+}
+
+.section-title {
+    text-align: center;
+    margin: 30px 0 20px 0;
+}
+
+.products {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px 50px 20px;
+}
+
+/* Product Cards */
+.card {
+    background: #ffffff;
+    color: #6b0000;
+    padding: 10px;
+    border-radius: 12px;
+    width: 180px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(74,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.product-thumbnail {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Product Detail */
+.product-detail {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 999;
+    padding: 50px 20px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 50px;
+    overflow-y: auto;
+}
+
+.detail-left {
+    flex: 1;
+    text-align: center;
+}
+
+.detail-left img#detail-main-photo {
+    width: 300px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.thumbnails img {
+    width: 60px;
+    margin: 0 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.thumbnails img:hover {
+    border: 2px solid #6b0000;
+}
+
+.detail-right {
+    flex: 1;
+    max-width: 300px;
+}
+
+.detail-right h2 {
+    color: #6b0000;
+}
+
+.detail-right .price {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.detail-right input[type=number] {
+    width: 60px;
+    padding: 5px;
+    margin: 5px 0 10px 0;
+}
+
+.detail-right button {
+    background: #6b0000;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.detail-right button:hover {
+    background: #6b0000;
+}
+
+/* Footer */
+footer {
+    background: #6b0000;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #6b0000;
+}
+
+
+/* MENU */
+.menu-icon {
+  justify-self: start;
+  color: #ffffff;
+}
+
+
+/* LOGO */
+.logo {
+  color: white;
+  font-size: 28px;
+  font-weight: 600;
+  justify-self: center;
+  letter-spacing: 1px;
+}
+
+
+/* RIGHT ACTIONS */
+.top-actions {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+/* SEARCH */
+.search-bar {
+  padding: 7px 12px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+
+/* ICONS */
+.icon-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+
+footer {
+  background: #7a0f1a; /* dark red */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+footer a {
+  color: white;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-right {
+  font-size: 13px;
+}
+
+
+.about-section {
+  background: #7a0f1a;
+  color: white;
+  padding: 80px 20px;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.about-content h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.about-content p {
+  font-size: 17px;
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  width: 260px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+  padding: 20px;
+  transition: transform 0.3s ease;
+  z-index: 9999;
+}
+
+.side-menu a {
+  display: block;
+  padding: 12px 0;
+  font-size: 16px;
+  color: #7a0f1a;
+}
+
+.side-menu hr {
+  margin: 15px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-menu {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.side-menu a,
+.icon-btn,
+.menu-icon,
+.close-menu {
+  cursor: pointer;
+}
+
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 20px rgba(0,0,0,0.2);
+  padding: 20px;
+  transform: translateX(100%);
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-cart {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.cart-items {
+  margin-top: 20px;
+}
+
+.cart-footer {
+  position: absolute;
+  bottom: 20px;
+  width: 85%;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 12px;
+  background: #7a0f1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.saves-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 20px rgba(0,0,0,0.2);
+  padding: 20px;
+  transform: translateX(100%);
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.saves-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-saves {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.saves-items {
+  margin-top: 20px;
+}
+
+
+.profile-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 20px rgba(0,0,0,0.2);
+  padding: 20px;
+  transform: translateX(100%);
+  transition: transform 0.3s;
+  z-index: 9999;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-profile {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.profile-content {
+  margin-top: 20px;
+}
+
+.profile-content button {
+  width: 100%;
+  padding: 12px;
+  background: #7a0f1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}
