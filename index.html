@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIMPO</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIMPO</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
   <!-- Top Bar -->
@@ -28,52 +27,51 @@
       <h2>LIMPO</h2>
       <span class="close-menu" onclick="closeMenu()">×</span>
     </div>
-
     <a href="#">Home</a>
     <a href="#">Shop</a>
     <a href="#">New Arrivals</a>
     <a href="#">Best Sellers</a>
     <a href="#about">About</a>
-    <a href="mailto:youremail@example.com">Contact Us</a>
+    <a href="mailto:limpo.online.store2025@gmail.com">Contact Us</a>
   </div>
 
   <!-- Products -->
   <main>
     <h2 class="section-title">Our Products</h2>
-    <div class="products" id="products-container">
-      <div class="card" onclick="openProductDetail(1)">
-        <img src="images/The First Bite 1.jpg" class="product-thumbnail">
-        <h3>The First Bite</h3>
-      </div>
-      <div class="card" onclick="openProductDetail(2)">
-        <img src="images/Bee's Bless 1.jpg" class="product-thumbnail">
-        <h3>Bee's Bless</h3>
-      </div>
+    <div class="products">
+        <div class="card" onclick="openProductDetail(1)">
+            <img src="images/The First Bite 1.jpg" class="product-thumbnail">
+            <h3>The First Bite</h3>
+        </div>
+        <div class="card" onclick="openProductDetail(2)">
+            <img src="images/Bee's Bless 1.jpg" class="product-thumbnail">
+            <h3>Bee's Bless</h3>
+        </div>
     </div>
   </main>
 
-  <!-- Product Detail -->
-  <div id="product-detail" class="product-detail">
+  <!-- Product Detail Panel -->
+  <div id="product-detail" class="panel">
     <div class="detail-left">
-      <img src="" id="detail-main-photo">
-      <div class="thumbnails" id="detail-thumbnails"></div>
+        <img src="" id="detail-main-photo">
+        <div class="thumbnails" id="detail-thumbnails"></div>
     </div>
     <div class="detail-right">
-      <h2 id="detail-name"></h2>
-      <p id="detail-description"></p>
-      <p class="price" id="detail-price"></p>
-      <label for="qty">Quantity:</label>
-      <input type="number" id="qty" value="1" min="1">
-      <button id="add-to-cart">Add to Cart</button>
-      <button id="close-detail">Close</button>
+        <h2 id="detail-name"></h2>
+        <p id="detail-description"></p>
+        <p class="price" id="detail-price"></p>
+        <label for="qty">Quantity:</label>
+        <input type="number" id="qty" value="1" min="1">
+        <button id="add-to-cart">Add to Cart</button>
+        <button onclick="closeProductDetail()">Close</button>
     </div>
   </div>
 
   <!-- Cart Panel -->
-  <div class="cart-panel" id="cart-panel">
-    <div class="cart-header">
+  <div class="panel cart-panel" id="cart-panel">
+    <div class="panel-header">
       <h2>My Cart</h2>
-      <span class="close-cart" onclick="closeCart()">×</span>
+      <span class="close-panel" onclick="closeCart()">×</span>
     </div>
     <div class="cart-items" id="cart-items"></div>
     <div class="cart-footer">
@@ -82,23 +80,23 @@
     </div>
   </div>
 
-  <!-- Saved Items Panel -->
-  <div class="saves-panel" id="saves-panel">
-    <div class="saves-header">
+  <!-- Saves Panel -->
+  <div class="panel saves-panel" id="saves-panel">
+    <div class="panel-header">
       <h2>Saved Items</h2>
-      <span class="close-saves" onclick="closeSaves()">×</span>
+      <span class="close-panel" onclick="closeSaves()">×</span>
     </div>
     <div class="saves-items" id="saves-items"></div>
   </div>
 
   <!-- Profile Panel -->
-  <div class="profile-panel" id="profile-panel">
-    <div class="profile-header">
+  <div class="panel profile-panel" id="profile-panel">
+    <div class="panel-header">
       <h2>My Profile</h2>
-      <span class="close-profile" onclick="closeProfile()">×</span>
+      <span class="close-panel" onclick="closeProfile()">×</span>
     </div>
     <div class="profile-content" id="profile-content">
-      <!-- Dynamic: Sign Up / Login or User Info -->
+      <!-- Content dynamically updated: login/signup or user info -->
     </div>
   </div>
 
@@ -106,20 +104,9 @@
   <section id="about" class="about-section">
     <div class="about-content">
       <h2>About LIMPO</h2>
-      <p>
-        LIMPO is a handmade beauty brand created for those who believe that self-care is a form of art.
-      </p>
-      <p>
-        Every product is carefully crafted with passion, patience, and love.
-      </p>
-      <p>
-        Our lip glosses are handmade in small batches using carefully selected ingredients for hydration,
-        comfort, and long-lasting shine.
-      </p>
-      <p>
-        At LIMPO, we don’t just sell products — we create experiences. Our goal is to make you feel
-        empowered, elegant, and unforgettable.
-      </p>
+      <p>LIMPO is a handmade beauty brand created for those who believe that self-care is a form of art.</p>
+      <p>Every product is carefully crafted with passion, patience, and love.</p>
+      <p>Our lip glosses are handmade in small batches for hydration, comfort, and long-lasting shine.</p>
     </div>
   </section>
 
@@ -136,7 +123,9 @@
     </div>
   </footer>
 
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
+
 </body>
 </html>

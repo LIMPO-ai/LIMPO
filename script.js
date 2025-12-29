@@ -1,183 +1,95 @@
-// ------------------ Supabase ------------------
-const supabaseUrl = "sb_publishable_Kwtr59qmzPDmPes_0yKfEA_aPmYE9Zd";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkcGZudHplZ21paHZjcmZsdGxvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY4MjA4NDcsImV4cCI6MjA4MjM5Njg0N30.GfvKkgLxgFfwDe0XbbE1lzWNQXEHipHDwiHn7i9wZnc";
+const supabaseUrl = 'sb_publishable_Kwtr59qmzPDmPes_0yKfEA_aPmYE9Zd';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkcGZudHplZ21paHZjcmZsdGxvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY4MjA4NDcsImV4cCI6MjA4MjM5Njg0N30.GfvKkgLxgFfwDe0XbbE1lzWNQXEHipHDwiHn7i9wZnc';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-// ------------------ Products ------------------
+// Products
 const products = {
-  1: {
-    name: "The First Bite",
-    description: "Handmade lip gloss with nourishing shine and hydration.",
-    price: 30,
-    images: ["images/The First Bite 2.png", "images/The First Bite 3.png"]
-  },
-  2: {
-    name: "Bee's Bless",
-    description: "Handmade cherry-scented lip gloss with soft shine.",
-    price: 30,
-    images: ["images/lipgloss2-1.jpg", "images/lipgloss2-2.jpg"]
-  }
+    1: { name: "The First Bite", description: "Handmade lip gloss", price: 30, images:["images/The First Bite 2.png","images/The First Bite 3.png"] },
+    2: { name: "Bee's Bless", description: "Handmade cherry lip gloss", price: 30, images:["images/lipgloss2-1.jpg","images/lipgloss2-2.jpg"] }
 };
 
-// ------------------ Product Detail ------------------
-function openProductDetail(id) {
-  const product = products[id];
-  if (!product) return;
+// Panels open/close
+function openMenu(){document.getElementById("side-menu").style.transform="translateX(0)";}
+function closeMenu(){document.getElementById("side-menu").style.transform="translateX(-100%)";}
+function openCart(){document.getElementById("cart-panel").style.transform="translateX(0)"; showCart();}
+function closeCart(){document.getElementById("cart-panel").style.transform="translateX(100%)";}
+function openSaves(){document.getElementById("saves-panel").style.transform="translateX(0)"; showSaves();}
+function closeSaves(){document.getElementById("saves-panel").style.transform="translateX(100%)";}
+function openProfile(){showProfile(); document.getElementById("profile-panel").style.transform="translateX(0)";}
+function closeProfile(){document.getElementById("profile-panel").style.transform="translateX(100%)";}
 
-  const detail = document.getElementById("product-detail");
-  detail.style.display = "flex";
+// Product Detail
+function openProductDetail(id){
+    const p=products[id]; if(!p) return;
+    document.getElementById("product-detail").style.display="flex";
+    document.getElementById("detail-name").textContent=p.name;
+    document.getElementById("detail-description").textContent=p.description;
+    document.getElementById("detail-price").textContent="AED "+p.price;
+    document.getElementById("detail-main-photo").src=p.images[0];
+    const thumbs=document.getElementById("detail-thumbnails"); thumbs.innerHTML="";
+    p.images.forEach(img=>{const t=document.createElement("img"); t.src=img; t.onclick=()=>document.getElementById("detail-main-photo").src=img; thumbs.appendChild(t);});
+    document.getElementById("add-to-cart").onclick=()=>{ const qty=parseInt(document.getElementById("qty").value); addToCart(id, qty);};
+}
+function closeProductDetail(){document.getElementById("product-detail").style.display="none";}
 
-  document.getElementById("detail-name").textContent = product.name;
-  document.getElementById("detail-description").textContent = product.description;
-  document.getElementById("detail-price").textContent = "AED " + product.price;
-  document.getElementById("detail-main-photo").src = product.images[0];
-
-  const thumbnailsDiv = document.getElementById("detail-thumbnails");
-  thumbnailsDiv.innerHTML = "";
-  product.images.forEach(img => {
-    const thumb = document.createElement("img");
-    thumb.src = img;
-    thumb.onclick = () => document.getElementById("detail-main-photo").src = img;
-    thumbnailsDiv.appendChild(thumb);
-  });
-
-  document.getElementById("add-to-cart").onclick = () => {
-    const qty = parseInt(document.getElementById("qty").value);
-    addToCart(id, qty);
-  };
+// Supabase Auth
+async function signUp(email,password,name,phone){
+    const {data,error}=await supabase.auth.signUp({email,password});
+    if(error){alert(error.message); return;}
+    await supabase.from('users').insert([{id:data.user.id,email,name,phone}]);
+    alert("Signed up!"); showProfile();
+}
+async function login(email,password){
+    const {data,error}=await supabase.auth.signInWithPassword({email,password});
+    if(error){alert(error.message); return;}
+    alert("Logged in!"); showProfile();
 }
 
-document.getElementById("close-detail").onclick = () => {
-  document.getElementById("product-detail").style.display = "none";
-};
-
-// ------------------ Panels ------------------
-function openMenu() { document.getElementById("side-menu").style.transform = "translateX(0)"; }
-function closeMenu() { document.getElementById("side-menu").style.transform = "translateX(-100%)"; }
-function openCart() { closeSaves(); closeProfile(); document.getElementById("cart-panel").style.transform = "translateX(0)"; showCart(); }
-function closeCart() { document.getElementById("cart-panel").style.transform = "translateX(100%)"; }
-function openSaves() { closeCart(); closeProfile(); document.getElementById("saves-panel").style.transform = "translateX(0)"; showSaves(); }
-function closeSaves() { document.getElementById("saves-panel").style.transform = "translateX(100%)"; }
-function openProfile() { closeCart(); closeSaves(); document.getElementById("profile-panel").style.transform = "translateX(0)"; showProfile(); }
-function closeProfile() { document.getElementById("profile-panel").style.transform = "translateX(100%)"; }
-
-// ------------------ Search ------------------
-document.getElementById("searchInput").addEventListener("input", function() {
-  const searchValue = this.value.toLowerCase();
-  const cards = document.querySelectorAll(".card");
-  cards.forEach(card => {
-    const name = card.querySelector("h3").textContent.toLowerCase();
-    card.style.display = name.includes(searchValue) ? "block" : "none";
-  });
-});
-
-// ------------------ Cart ------------------
-async function addToCart(productId, quantity) {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) { alert('Please log in'); return; }
-
-  const { error } = await supabase.from('cart_items').insert([{ user_id: user.id, product_id: productId, quantity }]);
-  if (error) alert(error.message);
-  else alert('Added to cart!');
+// Profile panel content
+async function showProfile(){
+    const {data:{user}}=await supabase.auth.getUser();
+    const content=document.getElementById("profile-content");
+    if(!user){
+        content.innerHTML=`<h3>Login / Sign Up</h3>
+        <input type="text" id="signup-name" placeholder="Name"><br><br>
+        <input type="email" id="signup-email" placeholder="Email"><br><br>
+        <input type="text" id="signup-phone" placeholder="Phone"><br><br>
+        <input type="password" id="signup-password" placeholder="Password"><br><br>
+        <button onclick="submitSignup()">Sign Up</button>
+        <hr>
+        <input type="email" id="login-email" placeholder="Email"><br><br>
+        <input type="password" id="login-password" placeholder="Password"><br><br>
+        <button onclick="submitLogin()">Login</button>`;}
+    else{
+        const {data,error}=await supabase.from('users').select('*').eq('id',user.id).single();
+        if(data){
+            content.innerHTML=`<p><strong>Name:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <hr>
+            <button onclick="logout()">Logout</button>`;}
+    }
 }
 
-async function showCart() {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return;
-
-  const { data: cartItems } = await supabase.from('cart_items').select('*').eq('user_id', user.id);
-  const cartDiv = document.getElementById('cart-items');
-  cartDiv.innerHTML = '';
-  let total = 0;
-
-  cartItems.forEach(item => {
-    const product = products[item.product_id];
-    total += product.price * item.quantity;
-    cartDiv.innerHTML += `<p>${product.name} x ${item.quantity} = AED ${product.price * item.quantity}</p>`;
-  });
-  document.getElementById('cart-total').textContent = total;
+async function submitSignup(){
+    const name=document.getElementById('signup-name').value;
+    const email=document.getElementById('signup-email').value;
+    const phone=document.getElementById('signup-phone').value;
+    const password=document.getElementById('signup-password').value;
+    if(!name||!email||!password){alert("Fill required!"); return;}
+    await signUp(email,password,name,phone);
+}
+async function submitLogin(){
+    const email=document.getElementById('login-email').value;
+    const password=document.getElementById('login-password').value;
+    await login(email,password);
 }
 
-// ------------------ Saved Items ------------------
-async function showSaves() {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return;
+// Cart / Saved Items
+async function addToCart(pid,qty){const {data:{user}}=await supabase.auth.getUser(); if(!user){alert("Login first"); return;}
+const {error}=await supabase.from('cart_items').insert([{user_id:user.id,product_id:pid,quantity:qty}]); if(error)alert(error.message); else alert("Added to cart!"); showCart();}
+async function showCart(){const {data:{user}}=await supabase.auth.getUser(); if(!user)return; const {data:items}=await supabase.from('cart_items').select('*').eq('user_id',user.id); let total=0; let html=""; items.forEach(i=>{const p=products[i.product_id]; total+=p.price*i.quantity; html+=`<p>${p.name} x ${i.quantity} = AED ${p.price*i.quantity}</p>`;}); document.getElementById('cart-items').innerHTML=html; document.getElementById('cart-total').textContent=total;}
+async function showSaves(){const {data:{user}}=await supabase.auth.getUser(); if(!user)return; const {data:items}=await supabase.from('saved_items').select('*').eq('user_id',user.id); let html=""; items.forEach(i=>{const p=products[i.product_id]; html+=`<p>${p.name}</p>`;}); document.getElementById('saves-items').innerHTML=html;}
+function logout(){supabase.auth.signOut(); alert("Logged out"); showProfile();}
 
-  const { data: savedItems } = await supabase.from('saved_items').select('*').eq('user_id', user.id);
-  const savesDiv = document.getElementById('saves-items');
-  savesDiv.innerHTML = '';
-  savedItems.forEach(item => {
-    const product = products[item.product_id];
-    savesDiv.innerHTML += `<p>${product.name}</p>`;
-  });
-}
-
-// ------------------ Authentication ------------------
-async function signUp(name, email, phone, password) {
-  const { data, error } = await supabase.auth.signUp({ email, password });
-  if (error) { alert(error.message); return; }
-
-  await supabase.from('users').insert([{ id: data.user.id, email, name, phone }]);
-  alert('Signed up successfully!');
-}
-
-async function login(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) { alert(error.message); return; }
-  alert('Logged in successfully!');
-}
-
-// ------------------ Profile ------------------
-async function showProfile() {
-  const { data: { user } } = await supabase.auth.getUser();
-  const profileContent = document.getElementById("profile-content");
-  if (!user) {
-    profileContent.innerHTML = `
-      <button onclick="openSignupForm()">Sign Up</button>
-      <button onclick="openLoginForm()">Log In</button>
-    `;
-    return;
-  }
-
-  const { data } = await supabase.from('users').select('*').eq('id', user.id).single();
-  profileContent.innerHTML = `
-    <p><strong>Name:</strong> ${data.name}</p>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <hr>
-    <button onclick="openOrders()">My Orders</button>
-    <button onclick="openSaves()">Saved Items ❤️</button>
-    <button onclick="logout()">Logout</button>
-  `;
-}
-
-// ------------------ SignUp / Login Forms ------------------
-function openSignupForm() { closeLoginForm(); document.getElementById("signup-form").style.display = "block"; }
-function closeSignupForm() { document.getElementById("signup-form").style.display = "none"; }
-function openLoginForm() { closeSignupForm(); document.getElementById("login-form").style.display = "block"; }
-function closeLoginForm() { document.getElementById("login-form").style.display = "none"; }
-
-async function submitSignup() {
-  const name = document.getElementById("signup-name").value;
-  const email = document.getElementById("signup-email").value;
-  const phone = document.getElementById("signup-phone").value;
-  const password = document.getElementById("signup-password").value;
-
-  if (!name || !email || !password) { alert("Please fill all required fields"); return; }
-  await signUp(name, email, phone, password);
-  closeSignupForm();
-  showProfile();
-}
-
-async function submitLogin() {
-  const email = document.getElementById("login-email").value;
-  const password = document.getElementById("login-password").value;
-
-  if (!email || !password) { alert("Please fill all fields"); return; }
-  await login(email, password);
-  closeLoginForm();
-  showProfile();
-}
-
-// ------------------ Orders / Logout ------------------
-function openOrders() { alert("Coming soon!"); }
-function logout() { supabase.auth.signOut(); showProfile(); alert("Logged out!"); }
+// Search
+document.getElementById("searchInput").addEventListener("input",function(){const v=this.value.toLowerCase(); document.querySelectorAll(".card").forEach(c=>{const n=c.querySelector("h3").textContent.toLowerCase(); c.style.display=n.includes(v)?"block":"none";})});
