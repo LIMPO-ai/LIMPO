@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIMPO</title>
+  <title>LIMPO - Handmade Beauty</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Top Bar -->
+  <!-- Top Bar / Header -->
   <header class="top-bar">
     <div class="menu-icon" onclick="openMenu()">☰</div>
     <a href="#" class="logo">LIMPO</a>
     <div class="top-actions">
-      <input type="text" placeholder="Search..." class="search-bar" id="searchInput">
+      <input type="text" placeholder="Search products..." id="searchInput">
       <button class="icon-btn" onclick="openCart()">🛒</button>
       <button class="icon-btn" onclick="openSaves()">❤️</button>
       <button class="icon-btn" onclick="openProfile()">👤</button>
@@ -21,7 +21,7 @@
   </header>
 
   <!-- Side Menu -->
-  <div class="side-menu" id="side-menu">
+  <nav class="side-menu" id="side-menu">
     <div class="menu-header">
       <h2>LIMPO</h2>
       <span class="close-menu" onclick="closeMenu()">×</span>
@@ -32,20 +32,13 @@
     <a href="#">New Arrivals</a>
     <a href="#">Best Sellers</a>
     <hr>
-  </div>
+  </nav>
 
-  <!-- Products Section -->
+  <!-- Main Products Section -->
   <main>
     <h2 class="section-title">Our Products</h2>
-    <div class="products">
-      <div class="card" onclick="openProductDetail(1)">
-        <img src="images/The First Bite 1.jpg" class="product-thumbnail">
-        <h3>The First Bite</h3>
-      </div>
-      <div class="card" onclick="openProductDetail(2)">
-        <img src="images/Bee's Bless 1.jpg" class="product-thumbnail">
-        <h3>Bee's Bless</h3>
-      </div>
+    <div class="products" id="products-container">
+      <!-- Product cards will be dynamically added here -->
     </div>
   </main>
 
@@ -58,7 +51,7 @@
     </div>
   </section>
 
-  <!-- Product Detail -->
+  <!-- Product Detail Modal -->
   <div id="product-detail" class="product-detail">
     <div class="detail-left">
       <img src="" id="detail-main-photo">
@@ -103,7 +96,7 @@
     <div class="profile-content" id="profile-content"></div>
   </div>
 
-  <!-- Sign Up Form -->
+  <!-- Sign Up / Login -->
   <div id="signup-form" class="auth-form">
     <h2>Sign Up</h2>
     <input type="text" id="signup-name" placeholder="Name">
@@ -113,7 +106,6 @@
     <button onclick="closeSignupForm()">Cancel</button>
   </div>
 
-  <!-- Login Form -->
   <div id="login-form" class="auth-form">
     <h2>Login</h2>
     <input type="email" id="login-email" placeholder="Email">
@@ -122,6 +114,7 @@
     <button onclick="closeLoginForm()">Cancel</button>
   </div>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-left">
       <a href="#about">About</a>
