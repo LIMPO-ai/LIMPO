@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LIMPO</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -27,17 +26,37 @@
       <h2>LIMPO</h2>
       <span class="close-menu" onclick="closeMenu()">×</span>
     </div>
-    <a href="#" onclick="scrollToSection('home')">Home</a>
-    <a href="#" onclick="scrollToSection('about')">About</a>
-    <a href="#" onclick="scrollToSection('shop')">Shop</a>
-    <a href="#" onclick="scrollToSection('best')">Best Sellers</a>
+    <a href="#" onclick="closeMenu()">Home</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#">Shop</a>
+    <a href="#">New Arrivals</a>
+    <a href="#">Best Sellers</a>
+    <hr>
   </div>
 
   <!-- Products Section -->
-  <main id="shop">
+  <main>
     <h2 class="section-title">Our Products</h2>
-    <div class="products" id="products-container"></div>
+    <div class="products">
+      <div class="card" onclick="openProductDetail(1)">
+        <img src="images/The First Bite 1.jpg" class="product-thumbnail">
+        <h3>The First Bite</h3>
+      </div>
+      <div class="card" onclick="openProductDetail(2)">
+        <img src="images/Bee's Bless 1.jpg" class="product-thumbnail">
+        <h3>Bee's Bless</h3>
+      </div>
+    </div>
   </main>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="about-content">
+      <h2>About LIMPO</h2>
+      <p>LIMPO is a handmade beauty brand created for those who believe self-care is art.</p>
+      <p>Every product is carefully crafted with passion and love for hydration, comfort, and shine.</p>
+    </div>
+  </section>
 
   <!-- Product Detail -->
   <div id="product-detail" class="product-detail">
@@ -56,46 +75,39 @@
     </div>
   </div>
 
-  <!-- Cart Panel -->
+  <!-- Panels -->
   <div class="cart-panel" id="cart-panel">
     <div class="cart-header">
       <h2>My Cart</h2>
       <span class="close-cart" onclick="closeCart()">×</span>
     </div>
-    <div class="cart-items" id="cart-items"></div>
+    <div id="cart-items" class="cart-items"></div>
     <div class="cart-footer">
       <p>Total: AED <span id="cart-total">0</span></p>
-      <button class="checkout-btn">Checkout</button>
     </div>
   </div>
 
-  <!-- Saved Items Panel -->
   <div class="saves-panel" id="saves-panel">
     <div class="saves-header">
       <h2>Saved Items</h2>
       <span class="close-saves" onclick="closeSaves()">×</span>
     </div>
-    <div class="saves-items" id="saves-items"></div>
+    <div id="saves-items" class="saves-items"></div>
   </div>
 
-  <!-- Profile Panel -->
   <div class="profile-panel" id="profile-panel">
     <div class="profile-header">
       <h2>My Profile</h2>
       <span class="close-profile" onclick="closeProfile()">×</span>
     </div>
-    <div class="profile-content" id="profile-content">
-      <button onclick="openSignupForm()">Sign Up</button>
-      <button onclick="openLoginForm()">Log In</button>
-    </div>
+    <div class="profile-content" id="profile-content"></div>
   </div>
 
-  <!-- Signup Form -->
+  <!-- Sign Up Form -->
   <div id="signup-form" class="auth-form">
     <h2>Sign Up</h2>
     <input type="text" id="signup-name" placeholder="Name">
     <input type="email" id="signup-email" placeholder="Email">
-    <input type="text" id="signup-phone" placeholder="Phone">
     <input type="password" id="signup-password" placeholder="Password">
     <button onclick="submitSignup()">Sign Up</button>
     <button onclick="closeSignupForm()">Cancel</button>
@@ -110,15 +122,17 @@
     <button onclick="closeLoginForm()">Cancel</button>
   </div>
 
-  <!-- About Section -->
-  <section id="about" class="about-section">
-    <div class="about-content">
-      <h2>About LIMPO</h2>
-      <p>LIMPO is a handmade beauty brand created with love.</p>
-      <p>Our lip glosses are handmade in small batches with high-quality ingredients.</p>
+  <footer>
+    <div class="footer-left">
+      <a href="#about">About</a>
+      <a href="mailto:limpo.online.store2025@gmail.com">Contact</a>
     </div>
-  </section>
+    <div class="footer-right">
+      <p>&copy; 2025 LIMPO</p>
+    </div>
+  </footer>
 
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
 </body>
