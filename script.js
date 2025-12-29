@@ -186,3 +186,50 @@ async function showSaves() {
         savesDiv.innerHTML += `<p>${product.name}</p>`;
     });
 }
+
+
+function openSignupForm() {
+    document.getElementById('signup-form').style.display = 'block';
+}
+
+function closeSignupForm() {
+    document.getElementById('signup-form').style.display = 'none';
+}
+
+function openLoginForm() {
+    document.getElementById('login-form').style.display = 'block';
+}
+
+function closeLoginForm() {
+    document.getElementById('login-form').style.display = 'none';
+}
+
+async function submitSignup() {
+    const name = document.getElementById('signup-name').value;
+    const email = document.getElementById('signup-email').value;
+    const phone = document.getElementById('signup-phone').value;
+    const password = document.getElementById('signup-password').value;
+
+    if (!name || !email || !password) {
+        alert('Please fill all required fields!');
+        return;
+    }
+
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) { alert(error.message); return; }
+
+    await supabase.from('users').insert([{ id: data.user.id, email, name, phone }]);
+    alert('Signed up successfully!');
+    closeSignupForm();
+}
+
+async function submitLogin() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) { alert(error.message); return; }
+
+    alert('Logged in successfully!');
+    closeLoginForm();
+}
