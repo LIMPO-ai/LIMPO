@@ -1,3 +1,4 @@
+// ------------------ Products ------------------
 const products = {
     1: {
         name: "The First Bite",
@@ -13,9 +14,10 @@ const products = {
     }
 };
 
+// ------------------ Product Detail ------------------
 function openProductDetail(id) {
     const product = products[id];
-    if(!product) return;
+    if (!product) return;
 
     const detail = document.getElementById("product-detail");
     detail.style.display = "flex";
@@ -36,8 +38,8 @@ function openProductDetail(id) {
     });
 
     document.getElementById("add-to-cart").onclick = () => {
-        const qty = document.getElementById("qty").value;
-        alert(`Added ${qty} x ${product.name} ($${product.price}) to cart!`);
+        const qty = parseInt(document.getElementById("qty").value);
+        addToCart(id, qty);
     };
 }
 
@@ -45,91 +47,141 @@ document.getElementById("close-detail").onclick = () => {
     document.getElementById("product-detail").style.display = "none";
 };
 
-
+// ------------------ Menu & Panels ------------------
 function openMenu() {
-  document.getElementById("side-menu").style.transform = "translateX(0)";
+    document.getElementById("side-menu").style.transform = "translateX(0)";
 }
-
 function closeMenu() {
-  document.getElementById("side-menu").style.transform = "translateX(-100%)";
+    document.getElementById("side-menu").style.transform = "translateX(-100%)";
+}
+function openCart() {
+    closeSaves();
+    document.getElementById("cart-panel").style.transform = "translateX(0)";
+    showCart();
+}
+function closeCart() {
+    document.getElementById("cart-panel").style.transform = "translateX(100%)";
+}
+function openSaves() {
+    closeCart();
+    document.getElementById("saves-panel").style.transform = "translateX(0)";
+    showSaves();
+}
+function closeSaves() {
+    document.getElementById("saves-panel").style.transform = "translateX(100%)";
+}
+function openProfile() {
+    showProfile();
+    closeCart();
+    closeSaves();
+    document.getElementById("profile-panel").style.transform = "translateX(0)";
+}
+function closeProfile() {
+    document.getElementById("profile-panel").style.transform = "translateX(100%)";
+}
+function openOrders() {
+    alert("This will open My Orders section (coming soon)!");
+}
+function logout() {
+    alert("Logged out (demo)!");
 }
 
+// ------------------ Search ------------------
 document.getElementById("searchInput").addEventListener("input", function() {
-  const searchValue = this.value.toLowerCase();
-  const cards = document.querySelectorAll(".card");
+    const searchValue = this.value.toLowerCase();
+    const cards = document.querySelectorAll(".card");
 
-  cards.forEach(card => {
-    const name = card.querySelector("h3").textContent.toLowerCase();
-    if (name.includes(searchValue)) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
+    cards.forEach(card => {
+        const name = card.querySelector("h3").textContent.toLowerCase();
+        card.style.display = name.includes(searchValue) ? "block" : "none";
+    });
 });
 
-
-let cart = [];
-
-function openCart() {
-  closeSaves();
-  document.getElementById("cart-panel").style.transform = "translateX(0)";
-}
-
-function closeCart() {
-  document.getElementById("cart-panel").style.transform = "translateX(100%)";
-}
-
-function openSaves() {
-  closeCart();
-  document.getElementById("saves-panel").style.transform = "translateX(0)";
-}
-
-function closeSaves() {
-  document.getElementById("saves-panel").style.transform = "translateX(100%)";
-}
-
-function openProfile() {
-  closeCart();
-  closeSaves();
-  document.getElementById("profile-panel").style.transform = "translateX(0)";
-}
-
-function closeProfile() {
-  document.getElementById("profile-panel").style.transform = "translateX(100%)";
-}
-
-function openOrders() {
-  alert("This will open My Orders section (coming soon)!");
-}
-
-function logout() {
-  alert("Logged out (demo)!");
-}
-
-// Signup
+// ------------------ Supabase Authentication ------------------
 async function signUp(email, password, name) {
-  const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: password
-  });
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) { alert(error.message); return; }
 
-  if (error) {
-    alert(error.message);
-  } else {
-    // Save name in 'users' table
     await supabase.from('users').insert([{ id: data.user.id, email, name }]);
-    alert("Registered successfully!");
-  }
+    alert('Registered successfully!');
 }
 
-// Login
 async function login(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
-  if (error) alert(error.message);
-  else alert("Logged in!");
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) alert(error.message);
+    else alert('Logged in!');
 }
 
+// ------------------ Profile ------------------
+async function showProfile() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { data, error } = await supabase.from('users')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+    if (data) {
+        document.querySelector('.profile-content').innerHTML = `
+            <p><strong>Name:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <hr>
+            <button onclick="openOrders()">My Orders</button>
+            <button onclick="openSaves()">Saved Items ❤️</button>
+            <button onclick="logout()">Logout</button>
+        `;
+    }
+}
+
+// ------------------ Cart ------------------
+async function addToCart(productId, quantity) {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { alert('Please log in'); return; }
+
+    const { error } = await supabase.from('cart_items').insert([
+        { user_id: user.id, product_id: productId, quantity }
+    ]);
+
+    if (error) alert(error.message);
+    else alert('Added to cart!');
+}
+
+async function showCart() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { data: cartItems } = await supabase.from('cart_items')
+        .select('*')
+        .eq('user_id', user.id);
+
+    const cartDiv = document.getElementById('cart-items');
+    cartDiv.innerHTML = '';
+    let total = 0;
+
+    cartItems.forEach(item => {
+        const product = products[item.product_id];
+        total += product.price * item.quantity;
+        cartDiv.innerHTML += `<p>${product.name} x ${item.quantity} = AED ${product.price * item.quantity}</p>`;
+    });
+
+    document.getElementById('cart-total').textContent = total;
+}
+
+// ------------------ Saved Items ------------------
+async function showSaves() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { data: savedItems } = await supabase.from('saved_items')
+        .select('*')
+        .eq('user_id', user.id);
+
+    const savesDiv = document.getElementById('saves-items');
+    savesDiv.innerHTML = '';
+
+    savedItems.forEach(item => {
+        const product = products[item.product_id];
+        savesDiv.innerHTML += `<p>${product.name}</p>`;
+    });
+}
