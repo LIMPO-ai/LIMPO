@@ -102,3 +102,43 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+
+// ===== Login =====
+const loginForm = document.getElementById("login-form");
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault(); // prevent page reload
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    console.log(error.message); // you can display error in a div on page instead
+  } else {
+    window.location.href = "shop.html"; // redirect after successful login
+  }
+});
+
+
+// ===== Register =====
+const registerForm = document.getElementById("register-form");
+registerForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("register-email").value;
+  const password = document.getElementById("register-password").value;
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password
+  });
+
+  if (error) {
+    console.log(error.message); // show error on page
+  } else {
+    window.location.href = "login.html"; // redirect to login page after signup
+  }
+});

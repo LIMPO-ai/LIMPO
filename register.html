@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIMPO | Create Account</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Side Menu -->
+  <div class="side-menu" id="side-menu">
+    <div class="panel-header">
+      <h2>Menu</h2>
+      <span class="close-panel" onclick="closeMenu()">×</span>
+    </div>
+    <a href="index.html">🏠 Home</a>
+    <a href="shop.html">🛍 Shop</a>
+    <a href="new-arrivals.html">✨ New Arrivals</a>
+    <a href="best-sellers.html">🔥 Best Sellers</a>
+    <a href="index.html#about">ℹ️ About</a>
+    <a href="mailto:limpo.online.store2025@gmail.com">📩 Contact</a>
+  </div>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="menu-icon" onclick="openMenu()">☰</div>
+    <a href="index.html" class="logo">LIMPO</a>
+  </header>
+  <!-- Main Content -->
+  <main class="auth-page">
+  <div class="auth-card">
+    <h2>Create Account</h2>
+    <form id="register-form">
+      <input type="email" id="register-email" placeholder="Email" required>
+      <input type="password" id="register-password" placeholder="Password" required>
+      <button type="submit">Create Account</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Log In</a></p>
+  </div>
+</main>
+
+
+<!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="mailto:limpo.online.store2025@gmail.com">Contact Us</a>
+      <a href="https://www.instagram.com/limpo_official2025/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@limpo3381" target="_blank">TikTok</a>
+      <a href="index.html#about">About</a>
+    </div>
+    <p>© 2025 LIMPO. All rights reserved.</p>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

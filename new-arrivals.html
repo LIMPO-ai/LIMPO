@@ -13,7 +13,6 @@
       <h2>Menu</h2>
       <span class="close-panel" onclick="closeMenu()">×</span>
     </div>
-
     <a href="index.html">🏠 Home</a>
     <a href="shop.html">🛍 Shop</a>
     <a href="new-arrivals.html">✨ New Arrivals</a>
@@ -26,7 +25,6 @@
   <header class="top-bar">
     <div class="menu-icon" onclick="openMenu()">☰</div>
     <a href="index.html" class="logo">LIMPO</a>
-
     <div class="top-actions">
       <input type="text" placeholder="Search..." class="search-bar" id="searchInput">
       <button class="icon-btn" onclick="openCart()">🛒</button>
@@ -41,9 +39,7 @@
       <h2>My Cart</h2>
       <span class="close-panel" onclick="closeCart()">×</span>
     </div>
-
     <div id="cart-items">Your cart is empty.</div>
-
     <div class="cart-footer">
       <p>Total: AED <span id="cart-total">0</span></p>
       <button class="checkout-btn">Checkout</button>
@@ -75,18 +71,16 @@
   <!-- Main Content -->
   <main>
     <h2 class="section-title">New Arrivals</h2>
-
     <div class="products">
-
       <div class="card" onclick="openProductDetail(4)">
         <img src="images/Toffee Apple 1.jfif" class="product-thumbnail">
         <h3>Toffee Apple</h3>
       </div>
-
       <div class="card" onclick="openProductDetail(5)">
         <img src="images/Grape Glam 1.jfif" class="product-thumbnail">
         <h3>Grape Glam</h3>
       </div>
+    </div>
   </main>
 
   <!-- Product Detail (Hidden by default) -->
@@ -117,7 +111,11 @@
     <p>© 2025 LIMPO. All rights reserved.</p>
   </footer>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+  <script src="supabase.js"></script>
+  <script src="script.js"></script>
+
+
 </body>
 </html>
