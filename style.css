@@ -388,3 +388,57 @@ footer { background:#7a0f1a; color:white; text-align:center; padding:20px; }
 .auth-card p a:hover {
   text-decoration: underline;
 }
+
+
+/* Login/Register Page */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  padding: 20px;
+}
+
+.auth-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 20px;
+  color: #6b0000;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 12px;
+  background: #6b0000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.auth-card button:hover {
+  background: #7a0f1a;
+}
+
+.auth-card p.error {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}

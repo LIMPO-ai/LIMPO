@@ -76,4 +76,55 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.querySelector(".profile-btn.login");
   const registerBtn = document.querySelector(".profile-btn.register");
   const profileStatus = document.querySelector(".profile-content p strong");
+
+if(loginBtn){
+  loginBtn.addEventListener("click", () => {
+    window.location.href = "login.html";
+  });
+}
+
+if(registerBtn){
+  registerBtn.addEventListener("click", () => {
+    window.location.href = "register.html";
+  });
+}
 });
+
+
+const supabase = window._supabaseClient || window.supabase;
+
+async function updateProfileUI() {
+  const { data: { user } } = await supabase.auth.getUser();
+
+  const status = document.getElementById("profile-status");
+  const email = document.getElementById("profile-email");
+  const loginBtn = document.getElementById("go-login");
+  const registerBtn = document.getElementById("go-register");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  if (user) {
+    status.textContent = "Logged In";
+    email.textContent = user.email;
+    email.style.display = "block";
+
+    loginBtn.style.display = "none";
+    registerBtn.style.display = "none";
+    logoutBtn.style.display = "block";
+  } else {
+    status.textContent = "Guest";
+    email.style.display = "none";
+
+    loginBtn.style.display = "block";
+    registerBtn.style.display = "block";
+    logoutBtn.style.display = "none";
+  }
+}
+
+document.getElementById("go-login").onclick = () => location.href = "login.html";
+document.getElementById("go-register").onclick = () => location.href = "register.html";
+document.getElementById("logout-btn").onclick = async () => {
+  await supabase.auth.signOut();
+  updateProfileUI();
+};
+
+updateProfileUI();

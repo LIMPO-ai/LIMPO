@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>LIMPO</title>
   <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -62,12 +63,18 @@
       <span class="close-panel" onclick="closeProfile()">×</span>
     </div>
     <div class="profile-content">
-  <p><strong>Status:</strong> Guest</p>
-  <button class="profile-btn login" onclick="location.href='login.html'">Log In</button>
-  <button class="profile-btn register" onclick="location.href='register.html'">Create Account</button>
+  <p><strong>Status:</strong> <span id="profile-status">Guest</span></p>
+<p id="profile-email" style="display:none;"></p>
+
+<button class="profile-btn login" id="go-login">Log In</button>
+<button class="profile-btn register" id="go-register">Create Account</button>
+
+<button class="profile-btn logout" id="logout-btn" style="display:none;">Log Out</button>
 </div>
   </div>
 
+
+  
   <!-- Hero Section -->
   <main class="hero-section">
     <div class="hero-content">
