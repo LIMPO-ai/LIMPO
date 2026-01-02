@@ -73,7 +73,7 @@ const products = {
     images: [
       "images/Bee's Bless 1.jpg",
       "images/Bee's Bless 2.jpg",
-      "images/Bee's Bless 5_LE_upscale_balanced_x4"
+      "images/Bee's Bless 3.jpg"
     ] 
   },
 
@@ -93,7 +93,7 @@ const products = {
     price: 29.99, 
     images: [
       "images/Toffee Apple 1.jfif",
-      "images/Toffee Apple 2.png",
+      "images/Toffee Apple 2.jpg",
     ] 
   },
 
@@ -103,7 +103,6 @@ const products = {
     price: 29.99, 
     images: [
       "images/Grape Glam 1.jfif",
-      "images/Grape Glam 2.jfif",
     ] 
   }
 };
