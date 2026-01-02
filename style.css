@@ -442,3 +442,16 @@ footer { background:#7a0f1a; color:white; text-align:center; padding:20px; }
   margin-top: 10px;
   font-size: 14px;
 }
+
+
+.popup-main-img {
+  width: 100%;
+  max-width: 350px;
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.popup-main-img.zoomed {
+  transform: scale(1.6);
+  cursor: zoom-out;
+}

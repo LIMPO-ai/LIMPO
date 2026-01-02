@@ -1,28 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   // ===== PANEL FUNCTIONS =====
-  function openMenu() { document.getElementById("side-menu").style.transform = "translateX(0)"; }
-  function closeMenu() { document.getElementById("side-menu").style.transform = "translateX(-100%)"; }
+  function openMenu(){ document.getElementById("side-menu").style.transform="translateX(0)"; }
+  function closeMenu(){ document.getElementById("side-menu").style.transform="translateX(-100%)"; }
 
-  function openCart() {
-    closeSaves(); closeProfile();
-    document.getElementById("cart-panel").style.transform = "translateX(0)";
-  }
-  function closeCart() { document.getElementById("cart-panel").style.transform = "translateX(100%)"; }
+  function openCart(){ closeSaves(); closeProfile(); document.getElementById("cart-panel").style.transform="translateX(0)"; }
+  function closeCart(){ document.getElementById("cart-panel").style.transform="translateX(100%)"; }
 
-  function openSaves() {
-    closeCart(); closeProfile();
-    document.getElementById("saves-panel").style.transform = "translateX(0)";
-  }
-  function closeSaves() { document.getElementById("saves-panel").style.transform = "translateX(100%)"; }
+  function openSaves(){ closeCart(); closeProfile(); document.getElementById("saves-panel").style.transform="translateX(0)"; }
+  function closeSaves(){ document.getElementById("saves-panel").style.transform="translateX(100%)"; }
 
-  function openProfile() {
-    closeCart(); closeSaves();
-    document.getElementById("profile-panel").style.transform = "translateX(0)";
-  }
-  function closeProfile() { document.getElementById("profile-panel").style.transform = "translateX(100%)"; }
+  function openProfile(){ closeCart(); closeSaves(); document.getElementById("profile-panel").style.transform="translateX(0)"; }
+  function closeProfile(){ document.getElementById("profile-panel").style.transform="translateX(100%)"; }
 
-  // Make them usable by HTML onclick
   window.openMenu = openMenu;
   window.closeMenu = closeMenu;
   window.openCart = openCart;
@@ -32,28 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.openProfile = openProfile;
   window.closeProfile = closeProfile;
 
-  // ===== AUTH BUTTON NAVIGATION =====
-const loginBtn = document.querySelector(".profile-btn.login");
-const registerBtn = document.querySelector(".profile-btn.register");
-
-if (loginBtn) {
-  loginBtn.addEventListener("click", () => {
-    window.location.href = "login.html";
-  });
-}
-
-if (registerBtn) {
-  registerBtn.addEventListener("click", () => {
-    window.location.href = "register.html";
-  });
-}
-
-
-// ===== PRODUCTS =====
-
-
-
-
+  // ===== PRODUCTS =====
 const products = {
   1: { 
     name: "The First Bite", 
@@ -73,7 +42,6 @@ const products = {
     images: [
       "images/Bee's Bless 1.jpg",
       "images/Bee's Bless 2.jpg",
-      "images/Bee's Bless 3.jpg"
     ] 
   },
 
@@ -108,37 +76,98 @@ const products = {
 };
 
 
-function openProductDetail(id){
-  const p = products[id];
-  if(!p) return;
+  window.openProductDetail = function(id){
+    const p = products[id];
+    if(!p) return;
 
-  const detail = document.getElementById("product-detail");
-  detail.style.display = "flex";
+    const detail = document.getElementById("product-detail");
+    detail.style.display = "flex";
 
-  document.getElementById("detail-name").textContent = p.name;
-  document.getElementById("detail-description").textContent = p.description;
-  document.getElementById("detail-price").textContent = "AED " + p.price;
+    document.getElementById("detail-name").textContent = p.name;
+    document.getElementById("detail-description").textContent = p.description;
+    document.getElementById("detail-price").textContent = "AED " + p.price;
 
-  const mainPhoto = document.getElementById("detail-main-photo");
-  mainPhoto.src = p.images[0];
+    const mainPhoto = document.getElementById("detail-main-photo");
+    mainPhoto.src = p.images[0];
+    mainPhoto.classList.remove("zoomed");
 
-  const thumbs = document.getElementById("detail-thumbnails");
-  thumbs.innerHTML = "";
+    const thumbs = document.getElementById("detail-thumbnails");
+    thumbs.innerHTML = "";
 
-  p.images.forEach(img => {
-    const t = document.createElement("img");
-    t.src = img;
-    t.onclick = () => mainPhoto.src = img;
-    thumbs.appendChild(t);
+    p.images.forEach(img => {
+      const t = document.createElement("img");
+      t.src = img;
+      t.onclick = () => {
+        mainPhoto.src = img;
+        mainPhoto.classList.remove("zoomed");
+      };
+      thumbs.appendChild(t);
+    });
+
+    // ===== ZOOM EFFECT =====
+mainPhoto.onclick = () => {
+  mainPhoto.classList.toggle("zoomed");
+};
+};
+
+  const closeBtn = document.getElementById("close-detail");
+  if(closeBtn){
+    closeBtn.onclick = () => document.getElementById("product-detail").style.display = "none";
+  }
+
+  // ===== AUTH BUTTONS =====
+  const loginBtn = document.querySelector(".profile-btn.login");
+  const registerBtn = document.querySelector(".profile-btn.register");
+
+  if(loginBtn) loginBtn.onclick = () => window.location.href = "login.html";
+  if(registerBtn) registerBtn.onclick = () => window.location.href = "register.html";
+
+
+  async function loadProducts() {
+  const { data: products, error } = await supabase
+    .from('products')
+    .select('*');
+
+  if (error) return console.log(error);
+
+  const container = document.getElementById('products-container');
+  container.innerHTML = '';
+
+  products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <h3>${p.name}</h3>
+      <img src="${p.images[0]}" onclick="openProductDetail(${p.id})">
+      <p>${p.description}</p>
+      <p>AED ${p.price}</p>
+      <button onclick="addToCart(${p.id})">Add to Cart</button>
+    `;
+    container.appendChild(card);
   });
 }
 
-document.getElementById("close-detail")?.addEventListener("click", () => {
-  document.getElementById("product-detail").style.display = "none";
-});
+loadProducts();
 
-window.openProductDetail = openProductDetail;
+async function loadProducts() {
+  const { data: products, error } = await supabase.from("products").select("*");
 
+  if (error) return console.log(error);
 
+  const container = document.getElementById("products-list");
+  container.innerHTML = "";
+
+  products.forEach(p => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = `
+      <img src="${p.images[0]}" onclick="openProductDetail(${p.id})">
+      <h3>${p.name}</h3>
+      <p>AED ${p.price}</p>
+    `;
+    container.appendChild(card);
+  });
+}
+loadProducts();
 
 });
