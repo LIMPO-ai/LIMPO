@@ -456,3 +456,19 @@ footer { background:#7a0f1a; color:white; text-align:center; padding:20px; }
   transform: scale(1.6);
   cursor: zoom-out;
 }
+
+
+body, html {
+  overflow-y: auto !important;
+}
+
+.hero-section,
+.products-section,
+header,
+footer,
+#cart-panel,
+#saves-panel,
+#profile-panel {
+  position: static !important;
+  transform: none !important;
+}
