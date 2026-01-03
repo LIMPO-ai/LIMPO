@@ -455,3 +455,12 @@ footer { background:#7a0f1a; color:white; text-align:center; padding:20px; }
   transform: scale(1.6);
   cursor: zoom-out;
 }
+
+
+#about {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 10;
+}
