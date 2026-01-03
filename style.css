@@ -200,15 +200,16 @@ footer { background:#7a0f1a; color:white; text-align:center; padding:20px; }
 
 
 .hero-section {
-  background-color: #6b0000; /* dark red */
-  color: white;               /* text in white */
-  height: 90vh;
+  background-color: #6b0000;
+  color: white;
+  min-height: 90vh;   /* not fixed height */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0 20px;
+  padding: 60px 20px;
 }
+
 
 
 .hero-content h1 {
@@ -454,13 +455,4 @@ footer { background:#7a0f1a; color:white; text-align:center; padding:20px; }
 .popup-main-img.zoomed {
   transform: scale(1.6);
   cursor: zoom-out;
-}
-
-
-#about {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  z-index: 10;
 }
